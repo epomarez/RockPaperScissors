@@ -45,6 +45,10 @@ function evaluatingFinalResults(uScore, cScore){
     }
 }
 
+
+
+
+/*
 function startGame(){
     let userWins = 0;
     let computerWins = 0;
@@ -63,10 +67,10 @@ function startGame(){
                 console.log("It's a tie");
                 break;
         }
-    }
+    }center
 
     evaluatingFinalResults(userWins, computerWins);
 
 }
-
-startGame();
+*/
+//startGame();

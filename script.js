@@ -1,40 +1,45 @@
-function getComputerChoice(){
-    return (Math.floor(Math.random()*3))+1;
+function getComputerChoice() {
+    return (Math.floor(Math.random() * 3)) + 1;
 }
 
-function getUserChoice(){
-    let userChoice = null;
-    do{
-        userChoice = prompt("Rock, paper or scissors?", "Rock");
-    }while(userChoice == null);
-     
-    switch(userChoice){
+function getUserChoice(userChoice) {
+
+    switch (userChoice) {
         case "Rock":
-            case "rock": 
+        case "rock":
             return 1;
-      
+
         case "Paper":
-            case "paper":
+        case "paper":
             return 2;
         case "Scissor":
-            case "scissor":
+        case "scissor":
             return 3;
     }
 }
 
-function playRound(userChoice, computerChoice){
+function playRound(userChoice, computerChoice) {
 
-    if(userChoice == computerChoice){
+    if (userChoice == computerChoice) {
         return 0;
-    } else if ( (userChoice == 1 && computerChoice == 2) || 
-    (userChoice == 2 && computerChoice == 3) ||
-    (userChoice == 3 && computerChoice == 1)){
+    } else if ((userChoice == 1 && computerChoice == 2) ||
+        (userChoice == 2 && computerChoice == 3) ||
+        (userChoice == 3 && computerChoice == 1)) {
         return 2;
     } else {
         return 1;
     }
 }
 
+
+let buttons = document.querySelectorAll("button");
+
+buttons.forEach(
+    button => button.addEventListener('click',
+        playRound(button.textContent, getComputerChoice())));
+
+
+/*
 function evaluatingFinalResults(uScore, cScore){
     if(uScore > cScore){
         console.log("User wins!");
@@ -44,9 +49,7 @@ function evaluatingFinalResults(uScore, cScore){
         console.log("There is no winner this time!");
     }
 }
-
-
-
+*/
 
 /*
 function startGame(){
@@ -59,11 +62,11 @@ function startGame(){
                 userWins += 1;
                 console.log("User wins this round");
                 break;
-            case 2: 
+            case 2:
                 computerWins += 1;
                 console.log("Computer wins this round");
                 break;
-            case 0: 
+            case 0:
                 console.log("It's a tie");
                 break;
         }

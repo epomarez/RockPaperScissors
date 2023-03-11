@@ -1,3 +1,7 @@
+let divGameResults = document.querySelector('.gameResults');
+
+
+
 function getComputerChoice() {
     return (Math.floor(Math.random() * 3)) + 1;
 }
@@ -31,30 +35,11 @@ function playRound(userChoice, computerChoice) {
     }
 }
 
+let userWins = 0;
+let computerWins = 0;    
 
-let buttons = document.querySelectorAll("button");
-
-buttons.forEach(
-    button => button.addEventListener('click',
-        playRound(button.textContent, getComputerChoice())));
-
-
-/*
-function evaluatingFinalResults(uScore, cScore){
-    if(uScore > cScore){
-        console.log("User wins!");
-    } else if(uScore < cScore){
-        console.log("The computer wins!");
-    } else {
-        console.log("There is no winner this time!");
-    }
-}
-*/
-
-/*
-function startGame(){
-    let userWins = 0;
-    let computerWins = 0;
+function evaluateRoundResults(rResults){
+    
 
     for(let i = 0; i < 5; i++){
         switch(playRound(getUserChoice(), getComputerChoice())){
@@ -75,5 +60,29 @@ function startGame(){
     evaluatingFinalResults(userWins, computerWins);
 
 }
+
+
+let buttons = document.querySelectorAll("button");
+let roundResults;
+
+buttons.forEach(
+    button => button.addEventListener('click',
+        roundResults = playRound(button.textContent, getComputerChoice())));
+
+//This is needed for see how I could show the results of the game
+/*
+function evaluatingFinalResults(uScore, cScore){
+    if(uScore > cScore){
+        console.log("User wins!");
+    } else if(uScore < cScore){
+        console.log("The computer wins!");
+    } else {
+        console.log("There is no winner this time!");
+    }
+}
 */
+
+
+
+
 //startGame();

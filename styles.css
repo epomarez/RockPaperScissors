@@ -41,15 +41,46 @@ button{
     margin: 5%;
 }
 
-.results, .results p {
+.labelScore {
     color: aliceblue;
     align-self: flex-start;
-    margin-left: 50px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.scores {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    height: 40px;
+    gap: 160px;
+}
+
+.score {
+    background-color: aliceblue;
+
+    height: 40px;
+    width: 60px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+
+    border-radius: 5px;
+    color: black;
+
 }
 
 .gameResults{
-    background-color: aliceblue;
+    background-color: black;
+
     height: 50px;
     width: 300px;
+    margin-top: 5px;
+
+    border-style: dashed;
+    border-color: aliceblue;
     border-radius: 3px;
+    color: white;
 }

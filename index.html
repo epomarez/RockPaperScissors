@@ -7,23 +7,24 @@
     <title>Document</title>
     <script src="script.js"></script>
     <link rel="stylesheet" href="styles.css" />
+    
   </head>
   <body class="theBody">
     <div class="gameConsole">
+        <div id="indications"><p>Please select an option!</p></div>
       <div class="buttonsContainer">
-        <button>Rock</button>
-        <button>Paper</button>
-        <button>Scissors</button>
+        <button id="rockBtn">Rock</button>
+        <button id="paperBtn">Paper</button>
+        <button id="scissorsBtn">Scissors</button>
       </div>
 
       <div class="resultsContainer">
-        <div class="labelScore"><p>User's score:</p> <p>Computer's score:</p></div>
-        <div class="scores">
-          <div class="user score"></div>
-          <div class="computer score"></div>
-        </div>
 
-        <div class="gameResults"><p></p></div>
+        <div class="gameResults">
+            <p class="roundNumber" >
+                <div class="labelScore"><p>User's score: 0</p> <p>Computer's score: 0</p></div>
+                <div class="labelRound"><p>Round: 0</p></div>
+        </p></div>
       </div>
     </div>
   </body>

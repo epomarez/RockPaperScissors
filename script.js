@@ -1,4 +1,5 @@
-let divGameResults = document.querySelector('.gameResults');
+let pIndications = document.getElementById("indications");
+let btnRock
 
 
 

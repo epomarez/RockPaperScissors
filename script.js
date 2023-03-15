@@ -1,89 +1,103 @@
-let pIndications = document.getElementById("indications");
-let btnRock
+//Variables
+let indications = document.querySelector('#indications');
+let optionButtons = document.querySelectorAll(".option");
+let btnRestart = document.querySelector("#btnRestart");
+let userScore = document.querySelector("#userScore");
+let computerScore = document.querySelector("#computerScore");
+let roundNumber = document.querySelector("#roundNumber");
+
+let userPoints = 0;
+let computerPoints = 0;
+let round = 1;
 
 
+//Functions
+function setGameVariables() {
+    userScore.textContent = `User's score: ${userPoints}`;
+    computerScore.textContent = `Computer's score: ${computerPoints}`;
+    if(round < 6){
+        roundNumber.textContent = `Round: ${round}`;
+    }
+    
+}
+
+function restartScores() {
+    userPoints = 0;
+    computerPoints = 0;
+    round = 1;
+    setGameVariables();
+    indications.textContent = "Please select an option!";
+}
+
+function startGame() {
+    restartScores();
+}
+
+function evaluatingFinalResults(userPoints, computerPoints) {
+    if (userPoints > computerPoints) {
+        indications.textContent = "Game over, User Wins!";
+    } else if (userPoints < computerPoints) {
+        indications.textContent = "Game over, Computer Wins!";
+    } else {
+        indications.textContent = "Game over, There is no winner this time!";
+    }
+}
 
 function getComputerChoice() {
-    return (Math.floor(Math.random() * 3)) + 1;
+    let option = ["Rock", "Paper", "Scissors"]
+    return option[(Math.floor(Math.random() * 3))];
 }
 
-function getUserChoice(userChoice) {
-
-    switch (userChoice) {
-        case "Rock":
-        case "rock":
-            return 1;
-
-        case "Paper":
-        case "paper":
-            return 2;
-        case "Scissor":
-        case "scissor":
-            return 3;
-    }
-}
 
 function playRound(userChoice, computerChoice) {
+    //Evaluates who is the round's winner.
+    let tie = (userChoice == computerChoice);
+    let computerWins = (userChoice == "Rock" && computerChoice == "Paper") ||
+        (userChoice == "Paper" && computerChoice == "Scissor") ||
+        (userChoice == "Scissor" && computerChoice == "Rock");
 
-    if (userChoice == computerChoice) {
+    round += 1;
+
+    if (tie) {
         return 0;
-    } else if ((userChoice == 1 && computerChoice == 2) ||
-        (userChoice == 2 && computerChoice == 3) ||
-        (userChoice == 3 && computerChoice == 1)) {
+    } else if (computerWins) {  
         return 2;
     } else {
-        return 1;
+        return 1; //User wins
     }
 }
 
-let userWins = 0;
-let computerWins = 0;    
+function evaluateRoundResults(rResult) {
 
-function evaluateRoundResults(rResults){
-    
+    switch (rResult) {
+        case 1:
+            userPoints += 1;
+            console.log("User wins this round");
+            break;
+        case 2:
+            computerPoints += 1;
+            console.log("Computer wins this round");
+            break;
+        case 0:
+            console.log("It's a tie");
+            break;
+    }
+}
 
-    for(let i = 0; i < 5; i++){
-        switch(playRound(getUserChoice(), getComputerChoice())){
-            case 1:
-                userWins += 1;
-                console.log("User wins this round");
-                break;
-            case 2:
-                computerWins += 1;
-                console.log("Computer wins this round");
-                break;
-            case 0:
-                console.log("It's a tie");
-                break;
+//Event Listeners
+optionButtons.forEach(button => button.addEventListener('click', (e) => {
+        if (round < 5) {
+            let roundResult = playRound(e.target.textContent, getComputerChoice());
+            evaluateRoundResults(roundResult);
+            setGameVariables(userPoints, computerPoints, round);
+        } else if (round === 5){
+            let roundResult = playRound(e.target.textContent, getComputerChoice());
+            evaluateRoundResults(roundResult);
+            setGameVariables(userPoints, computerPoints, round);
+            evaluatingFinalResults(userPoints, computerPoints);
         }
-    }center
+    }));
 
-    evaluatingFinalResults(userWins, computerWins);
+btnRestart.addEventListener('click', startGame);
 
-}
-
-
-let buttons = document.querySelectorAll("button");
-let roundResults;
-
-buttons.forEach(
-    button => button.addEventListener('click',
-        roundResults = playRound(button.textContent, getComputerChoice())));
-
-//This is needed for see how I could show the results of the game
-/*
-function evaluatingFinalResults(uScore, cScore){
-    if(uScore > cScore){
-        console.log("User wins!");
-    } else if(uScore < cScore){
-        console.log("The computer wins!");
-    } else {
-        console.log("There is no winner this time!");
-    }
-}
-*/
-
-
-
-
-//startGame();
+startGame();
